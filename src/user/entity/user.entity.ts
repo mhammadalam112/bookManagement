@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Book } from "src/book/entity/book.entity";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
 export class User{
@@ -13,4 +14,8 @@ export class User{
   
     @Column()
     role: string; 
+
+    @ManyToMany(() => Book, book => book.users,  { eager: true }) 
+    @JoinTable() 
+    books: Book[];
 }

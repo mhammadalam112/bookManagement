@@ -64,4 +64,14 @@ export class BookService {
         }
         return rows;
     } 
+
+    async findOne(id: number): Promise<Book> {
+        const book = await this.bookRepository.findOne({ where: { id } });
+    
+        if (!book) {
+          throw new HttpException('Book not found with the given id', HttpStatus.NOT_FOUND);
+        }
+    
+        return book;
+      }
 }
